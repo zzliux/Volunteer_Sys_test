@@ -201,10 +201,11 @@ public class Admin_Acts_update extends HttpServlet {
 			*/
 
 		} catch (Exception e) {
-			//e.printStackTrace();
+			e.printStackTrace();
 			return false;
 		}
 		return info_Update.addAct(title, content, startDate, endDate,
 				academy_id, act_enrollment);
 	}
 }
+ 
