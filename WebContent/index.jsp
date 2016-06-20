@@ -21,17 +21,17 @@
             if (user_statuscode == 1) {
                 un = request.getSession().getAttribute("stu_account").toString();
                 infoOut = "<li><a href=\"#\">"
-                        + un + "</a></li><li><a href=\"javascript:logout();\">注销</a></li><li><a href=\"./student/info.jsp\">查看基本信息</a></li>";
+                        + un + "</a></li><li><a href=\"javascript:logout();\">注销</a></li><li><a href=\"/Volunteer_Sys_test/student/info.jsp\">查看基本信息</a></li>";
             } else if (user_statuscode == 2) {
                 un = request.getSession().getAttribute("adm_username").toString();
                 infoOut = "<li><a href=\"#\""
-                        + un + "</li><li><a href=\"javascript:logout();\">注销</a></li><li><a href=\"./admin/act_manage.jsp\">本院活动管理</a></li><li><a href=\"./admin/stu_manage.jsp\">本院学生管理</a></li>" + "<li><a href=\"./admin/info.jsp\">查看基本信息</a></li>";
+                        + un + "</li><li><a href=\"javascript:logout();\">注销</a></li><li><a href=\"/Volunteer_Sys_test/admin/act_manage.jsp\">本院活动管理</a></li><li><a href=\"/Volunteer_Sys_test/admin/stu_manage.jsp\">本院学生管理</a></li>" + "<li><a href=\"/Volunteer_Sys_test/admin/info.jsp\">查看基本信息</a></li>";
             } else if (user_statuscode == 3) {
                 un = request.getSession().getAttribute("superadmin").toString();
-                infoOut = "<li><a href=\"#\"" + un +  "</li><li><a href=\"javascript:logout();\">注销</a></li><li><a href=\"./superadmin/adm_manage.jsp\">管理管理员</a></li>";
+                infoOut = "<li><a href=\"#\"" + un +  "</li><li><a href=\"javascript:logout();\">注销</a></li><li><a href=\"/Volunteer_Sys_test/superadmin/adm_manage.jsp\">管理管理员</a></li>";
             } else {
                 un = "用户登录";
-                infoOut = "<li><a href=\"#\"" + un +  "</li><li><a href=\"login.jsp\">普通用户/管理员</a></li><li><a href=\"./superadmin/login.jsp\">高级管理员</a></li>";
+                infoOut = "<li><a href=\"#\"" + un +  "</li><li><a href=\"/Volunteer_Sys_test/login.jsp\">普通用户/管理员</a></li><li><a href=\"/Volunteer_Sys_test/superadmin/login.jsp\">高级管理员</a></li>";
             }
         %>
         <div class="container-fluid">
@@ -43,7 +43,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">志愿者服务平台</a>
+                <a class="navbar-brand" href="/Volunteer_Sys_test/">志愿者服务平台</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -70,7 +70,7 @@
             success:function(data){
                 var out = '';
                 for(var i=0; i<data.length; i++){
-                    out += '<div class="col-sm-4"><div class="panel panel-default"><div class="panel-heading">' + data[i].act_title + '<a href="./activities?id=' + data[i].act_id + '" style="float:right">查看活动</a></div><div class="panel-body">' + data[i].act_content.substr(0,50) + '</div><ul class="list-group"><li class="list-group-item">' + data[i].act_startTime + ' - ' + data[i].act_endTime + '</li></ul></div></div></div></div>';
+                    out += '<div class="col-sm-4"><div class="panel panel-default"><div class="panel-heading">' + data[i].act_title + '<a href="./activities?id=' + data[i].act_id + '" style="float:right">查看活动</a></div><div class="panel-body" style="height: 6em;">' + data[i].act_content.substr(0,50) + '</div><ul class="list-group"><li class="list-group-item">' + data[i].act_startTime + ' 至 ' + data[i].act_endTime + '</li></ul></div></div></div></div>';
                 }
                 $('#ctn').html(out);
                 layer.close(load);
@@ -81,19 +81,4 @@
         });
     </script>
 </body>
-<!--	<br><label>基本活动展示，对所有用户开放:</label><br>
-	<p><a href="./activities?id=2">这是第1个测试活动</a></p>
-	<p><a href="./activities?id=3">这是第2个测试活动</a></p>
-	<p><a href="./activities?id=5">这是第3个测试活动</a></p>
-	<p><a href="./activities?id=6">这是第4个测试活动</a></p>
-	<p><a href="./activities?id=9">这是第5个测试活动</a></p>
-	<p><a href="./activities?id=12">这是第6个测试活动</a></p>
-	<p><a href="./activities?id=13">这是第7个测试活动</a></p>
-	<%--
-		out.print(request.getSession().getServletContext().getRealPath("/"));
-	--%>
-	<hr>
-	<br><label><a href="FileServletTest.jsp">图片上传测试：</a></label><br>
-	<p>普通管理员才可食用，上传图片后输入xxmodd.com:8080/image/，然后加上上传的文件名即可看到图片,还有务必使上传的文件名为数字或英文，因为中文会乱码。。</p>-->
-
 </html>
