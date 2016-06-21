@@ -1,11 +1,11 @@
 <%@page import="cn.edu.hnuc.volunteer_Sys.util.checkLogin"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="./js/user/logout.js"></script>
+<script type="text/javascript" src="/Volunteer_Sys_test/js/user/logout.js"></script>
 <link href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>

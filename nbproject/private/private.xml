@@ -3,18 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/x/jsp/Volunteer_Sys_test/WebContent/login.jsp</file>
-            <file>file:/C:/Users/x/jsp/Volunteer_Sys_test/src/JDBC/db-config.properties</file>
+            <file>file:/C:/Users/x/jsp/Volunteer_Sys_test/WebContent/js/activity/user_act_idshow.js</file>
             <file>file:/C:/Users/x/jsp/Volunteer_Sys_test/WebContent/activities/index.jsp</file>
             <file>file:/C:/Users/x/jsp/Volunteer_Sys_test/WebContent/index.jsp</file>
-            <file>file:/C:/Users/x/jsp/Volunteer_Sys_test/src/servlet/Admin_Stus_show.java</file>
-            <file>file:/C:/Users/x/jsp/Volunteer_Sys_test/src/cn/edu/hnuc/volunteer_Sys/util/info_Query.java</file>
-            <file>file:/C:/Users/x/jsp/Volunteer_Sys_test/src/servlet/IndexInfo.java</file>
-            <file>file:/C:/Users/x/jsp/Volunteer_Sys_test/src/JDBC/DBUtils.java</file>
-            <file>file:/C:/Users/x/jsp/Volunteer_Sys_test/src/servlet/Admin_Acts_update.java</file>
-            <file>file:/C:/Users/x/jsp/Volunteer_Sys_test/WebContent/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/x/jsp/Volunteer_Sys_test/src/JSON/JsonHelper.java</file>
-            <file>file:/C:/Users/x/jsp/Volunteer_Sys_test/src/JDBC/DBConn.java</file>
+            <file>file:/C:/Users/x/jsp/Volunteer_Sys_test/WebContent/js/student/stu_enlist.js</file>
         </group>
     </open-files>
 </project-private>
