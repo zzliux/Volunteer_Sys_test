@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import JSON.JsonHelper;
 import cn.edu.hnuc.volunteer_Sys.entity.Activity;
 import cn.edu.hnuc.volunteer_Sys.util.info_Query;
+import com.google.gson.Gson;
 
 /**
  * Servlet implementation class act_show
@@ -40,45 +41,19 @@ public class Admin_Acts_show extends HttpServlet {
 
 		int userid = cn.edu.hnuc.volunteer_Sys.util.checkLogin.checkL(request,
 				response);
-		// if (userid == 3) {
-		// StringBuffer sb = new StringBuffer();
-		// sb.append("[");
-		// ArrayList<Activity> activities = info_Query.actsQuery();//
-		// 超级管理员查看全部活动信息
-		// for (int i = 0; i < activities.size(); i++) {
-		// sb.append(JsonHelper.toJSON(activities.get(i)));
-		// if (i != activities.size() - 1) {
-		// sb.append(",");
-		// }
-		// }
-		// sb.append("]");
-		// PrintWriter pw = response.getWriter();
-		// pw.print(sb.toString());
-		// pw.close();
-		// } else
 		//只有普通管理员才能查看本院的活动
 		if (userid == 2) {
-			StringBuffer sb = new StringBuffer();
-			sb.append("[");
 			String adm_username = (String) request.getSession().getAttribute(
 					"adm_username");// 获取管理员账号
 			int academy_id = info_Query.admQuery(adm_username).getAcademy_id();
 			ArrayList<Activity> activities = info_Query.actsQuery(academy_id);// 普通管理员查看本院活动信息
-			for (int i = 0; i < activities.size(); i++) {
-				sb.append(JsonHelper.toJSON(activities.get(i)));
-				if (i != activities.size() - 1) {
-					sb.append(",");
-				}
-			}
-			sb.append("]");
 			PrintWriter pw = response.getWriter();
-			pw.print(sb.toString());
+            pw.print((new Gson()).toJson(activities));
 			pw.close();
 		} else {
 			PrintWriter pw = response.getWriter();
 			pw.print("empty");
 			pw.close();
-			// response.sendRedirect("../login.jsp");
 		}
 	}
 
