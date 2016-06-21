@@ -75,7 +75,6 @@ public class Register extends HttpServlet {
 			// System.out.println(Email);
 			// student = new Students(Account, PassWord, UserName, Gender, Tel,
 			// QQ,Academy , Email);
-			response.getWriter().println("<script type=\"text/javascript\"> console.log("+UserName+"console.log("+Gender+")</script>");
 
 		} catch (Exception e) {
 			response.sendRedirect("../register.jsp");
