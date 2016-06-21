@@ -25,7 +25,7 @@
             } else if (user_statuscode == 2) {
                 un = request.getSession().getAttribute("adm_username").toString();
                 infoOut = "<li><a href=\"#\""
-                        + un + "</li><li><a href=\"javascript:logout();\">注销</a></li><li><a href=\"/Volunteer_Sys_test/admin/act_manage.jsp\">本院活动管理</a></li><li><a href=\"/Volunteer_Sys_test/admin/stu_manage.jsp\">本院学生管理</a></li><li><li><a href=\"/Volunteer_Sys_test/changePassword/\">修改密码</a></li>";
+                        + un + "</li><li><a href=\"javascript:logout();\">注销</a></li><li><a href=\"/Volunteer_Sys_test/admin/act_manage.jsp\">本院活动管理</a></li><li><a href=\"/Volunteer_Sys_test/admin/stu_manage.jsp\">本院学生管理</a></li><li><a href=\"/Volunteer_Sys_test/changePassword/\">修改密码</a></li>";
             } else if (user_statuscode == 3) {
                 un = request.getSession().getAttribute("superadmin").toString();
                 infoOut = "<li><a href=\"#\"" + un +  "</li><li><a href=\"javascript:logout();\">注销</a></li><li><a href=\"/Volunteer_Sys_test/superadmin/adm_manage.jsp\">管理管理员</a></li>";
