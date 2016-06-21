@@ -84,6 +84,7 @@ function submit() {
 					<th>已报名人数</th>
 					<th>操作</th>
 					<th>操作</th>
+                    <th>操作</th>
 				</tr>
             </table>
             <div class="panel-body">
@@ -93,7 +94,7 @@ function submit() {
     </div>
     <script>
         var ind = layer.msg('加载中', {icon: 16});
-
+        var act_data;
         $.ajax({
             url: '/Volunteer_Sys_test/servlet/admin_Acts_show',
             method: 'post',
@@ -101,6 +102,7 @@ function submit() {
             data:{},
             success: function(data){
                 console.log(data);
+                act_data = data;
                 var status;
                 for(var i=0; i<data.length; i++){
                     if (data[i].act_status === 1) {
@@ -110,7 +112,7 @@ function submit() {
                     } else {
                         status = "未开始";
                     }
-                    $('#table').append('<tr><td>' + (i+1) +  '</td><td>' + data[i].act_title + '</td><td>' + data[i].act_startTime + '</td><td>' + data[i].act_endTime + '</td><td>' + status + '</td><td>' + data[i].academy_info.myHashMap.aca_name + '</td><td>' + data[i].academy_info.myHashMap.aca_man + '</td><td>' + data[i].act_enrollment + '</td><td>' + data[i].act_actual_enrollment + '</td><td><button class="btn btn-default" onclick="act_delete(' + data[i].act_id + ')">删除</button></td><td><a href="./actupdate?act_id=' + data[i].act_id + '">修改</a></td></tr>');
+                    $('#table').append('<tr><td>' + (i+1) +  '</td><td>' + data[i].act_title + '</td><td>' + data[i].act_startTime + '</td><td>' + data[i].act_endTime + '</td><td>' + status + '</td><td>' + data[i].academy_info.myHashMap.aca_name + '</td><td>' + data[i].academy_info.myHashMap.aca_man + '</td><td>' + data[i].act_enrollment + '</td><td>' + data[i].act_actual_enrollment + '</td><td><button class="btn btn-default" onclick="lookStu(' + data[i].act_id + ')">查看报名学生</button></td><td><button class="btn btn-default" onclick="act_delete(' + data[i].act_id + ')">删除</button></td><td><a class="btn btn-default" href="./actupdate?act_id=' + data[i].act_id + '">修改</a></td></tr>');
                 }
                 layer.close(ind);
             },
@@ -118,6 +120,17 @@ function submit() {
                 layer.msg('网络错误，请重新刷新本页');
             }
         });
+        function lookStu(id){
+            for(var i=0;i<act_data.length;i++){
+                if(id === act_data[i].act_id)
+                    break;
+            }
+            var out = [];
+            for(var j=0;j<act_data[i].stuList.length; j++){
+                out.push(act_data[i].stuList[j].stu_name);
+            }
+            layer.alert(out.join('， '));
+        }
     </script>
 </body>
 </html>
