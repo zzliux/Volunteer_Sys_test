@@ -6,7 +6,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.google.code.kaptcha.Constants"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -95,9 +95,8 @@
 					if (superadminVerification.checkSupadmin_psw(
 							super_username, super_password)) {
 						//设置超级管理员身份
-						request.getSession().setAttribute("superadmin",
-								super_username);
-						showAdmin();
+						request.getSession().setAttribute("superadmin", super_username);
+						response.sendRedirect("adm_manage.jsp");
 					} else {
 						out.print("<script type=\"text/javascript\">alert(\"用户名或密码错误！\");window.location=\"login.jsp \";</script>");
 					}
@@ -118,7 +117,7 @@
 		int id = 1;//序号
 		StringBuffer sb = new StringBuffer();
 		sb.append("<table class=\"table\">");
-		sb.append("<tr><th>序号</th><th>用户名</th><th>学院</th><th>学院负责人</th><th>联系电话</th><th>操作</th><th>操作</th></tr>");
+		sb.append("<tr><th>序号</th><th>用户名</th><th>学院</th><th>学院负责人</th><th>联系电话</th><th>操作</th></tr>");
 		for (Admins adm : admins) {
 			sb.append("<tr><td>"
 					+ (id++)
@@ -133,8 +132,6 @@
 					+ "</td><td>"
 					+ "<input type=\"button\" value=\"删除\" class=\"btn btn-default\" onclick=\"admin_delete("
 					+ adm.getAdm_id() + ")\""
-					+ "</td><td>" +
-					"<a class=\"btn btn-default\" href=\"adminupdate?adm_id="+adm.getAdm_id()+"\">修改</a>"
 					+ "</td><td>"+
 					"</td></tr>");
 		}
