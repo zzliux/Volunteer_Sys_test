@@ -38,7 +38,7 @@
             if (user_statuscode == 1) {
                 un = request.getSession().getAttribute("stu_account").toString();
                 infoOut = "<li><a href=\"#\">"
-                        + un + "</a></li><li><a href=\"javascript:logout();\">注销</a></li><li><a href=\"/Volunteer_Sys_test/student/info.jsp\">查看基本信息</a></li>";
+                        + un + "</a></li><li><a href=\"javascript:logout();\">注销</a></li><li><a href=\"/Volunteer_Sys_test/student/info.jsp\">查看基本信息</a></li><li><a href=\"/Volunteer_Sys_test/changePassword/\">修改密码</a></li>";
             } else if (user_statuscode == 2) {
                 un = request.getSession().getAttribute("adm_username").toString();
                 infoOut = "<li><a href=\"#\""

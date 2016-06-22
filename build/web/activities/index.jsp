@@ -1,6 +1,6 @@
 <%@page import="cn.edu.hnuc.volunteer_Sys.util.checkLogin"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -25,7 +25,7 @@
             if (user_statuscode == 1) {
                 un = request.getSession().getAttribute("stu_account").toString();
                 infoOut = "<li><a href=\"#\">"
-                        + un + "</a></li><li><a href=\"javascript:logout();\">注销</a></li><li><a href=\"/Volunteer_Sys_test/student/info.jsp\">查看基本信息</a></li>";
+                        + un + "</a></li><li><a href=\"javascript:logout();\">注销</a></li><li><a href=\"/Volunteer_Sys_test/student/info.jsp\">查看基本信息</a></li><li><a href=\"/Volunteer_Sys_test/changePassword/\">修改密码</a></li>";
             } else if (user_statuscode == 2) {
                 un = request.getSession().getAttribute("adm_username").toString();
                 infoOut = "<li><a href=\"#\""
@@ -78,7 +78,7 @@
         </div>
     </div>
 <script>
-    var load = layer.msg('加载中', {icon: 16});
+    var ind = layer.msg('加载中', {icon: 16});
     var getId = location.href.match(/\?id=(\d+)/)[1];
     $.ajax({
         url:'/Volunteer_Sys_test/servlet/basicAct_show',
@@ -105,7 +105,7 @@
             $('#act-stauts').html('活动状态：　' + status);
             $('#act-num').html('报名人数：　' + data.act_actual_enrollment + '/' + data.act_enrollment);
             
-            layer.close(load);
+            layer.close(ind);
         },
         error: function(){
             layer.msg('网络错误，请重新刷新本页');

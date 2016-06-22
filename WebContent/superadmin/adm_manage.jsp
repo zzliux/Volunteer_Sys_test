@@ -84,7 +84,5 @@
 		sb.append("</table>");
 		return sb.toString();
 	}%>
-
-
 </body>
 </html>
