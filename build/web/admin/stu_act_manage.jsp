@@ -3,8 +3,7 @@
 <%@page import="cn.edu.hnuc.volunteer_Sys.util.info_Query"%>
 <%@page import="cn.edu.hnuc.volunteer_Sys.entity.Students"%>
 <%@page import="cn.edu.hnuc.volunteer_Sys.util.checkLogin"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	if (checkLogin.checkL(request, response) != 2) {
 		response.sendRedirect("../login.jsp");
@@ -77,55 +76,55 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-8 col-sm-offset-2">
-                <div class="panel panel-default"</div>
+                <div class="panel panel-default">
                     <div class="panel-heading">学生信息</div>
                     <div class="panel-body">
                         <label>学生基本信息</label><br>
-            <p>姓名：<%=stu.getStu_name()%></p>
-            <p>学号：<%=stu.getStu_account()%></p>
-            <p>性别：<%=stu.getStu_sex()%></p>
-            <p>电话：<%=stu.getStu_phone()%></p>
-            <p>QQ：<%=stu.getStu_qq()%></p>
-            <p>邮箱：<%=stu.getStu_email()%></p>
-            <hr>
-            <label>该学生所参加的活动：</label><br>
+                            <p>姓名：<%=stu.getStu_name()%></p>
+                            <p>学号：<%=stu.getStu_account()%></p>
+                            <p>性别：<%=stu.getStu_sex()%></p>
+                            <p>电话：<%=stu.getStu_phone()%></p>
+                            <p>QQ：<%=stu.getStu_qq()%></p>
+                            <p>邮箱：<%=stu.getStu_email()%></p>
+                            <hr>
+                            <label>该学生所参加的活动：</label><br>
 
                     </div>
-                <table class="table">
-                    <tr>
-                        <th>#</th>
-                        <th>活动标题</th>
-                        <th>活动状态</th>
-                        <th>操作</th>
-                    </tr>
-                <%
-                    List<Activity> actList = stu.getActList();
-                    for (int i = 0; i < actList.size(); i++) {
-                        Activity act = actList.get(i);
-                        String act_status;
-                        int status = act.getAct_status();
-                        if(status==1){
-                            act_status = "进行中";
-                        }else if(status==2){
-                            act_status = "已结束";
-                        }else{
-                            act_status = "未开始";
+                    <table class="table">
+                        <tr>
+                            <th>#</th>
+                            <th>活动标题</th>
+                            <th>活动状态</th>
+                            <th>操作</th>
+                        </tr>
+                    <%
+                        List<Activity> actList = stu.getActList();
+                        for (int i = 0; i < actList.size(); i++) {
+                            Activity act = actList.get(i);
+                            String act_status;
+                            int status = act.getAct_status();
+                            if(status==1){
+                                act_status = "进行中";
+                            }else if(status==2){
+                                act_status = "已结束";
+                            }else{
+                                act_status = "未开始";
+                            }
+                    %>
+                        <tr>
+                            <td><%=i+1%></td>
+                            <td><%=act.getAct_title() %></td>
+                            <td><%=act_status %></td>
+                            <td><input type="button" value="删除" class="btn btn-default" onclick="stu_act_delete(<%=stu.getStu_id()%>,<%=act.getAct_id()%>)"></td>
+                        </tr>
+                    <% 
                         }
-                %>
-                    <tr>
-                        <td><%=i+1%></td>
-                        <td><%=act.getAct_title() %></td>
-                        <td><%=act_status %></td>
-                        <td><input type="button" value="删除" class="btn btn-default" onclick="stu_act_delete(<%=stu.getStu_id()%>,<%=act.getAct_id()%>)"></td>
-                    </tr>
-                <% 
-                    }
-                %>
+                    %>
+                    </table>
                 </table>
             </div>
         </div>
     </div>
-	
 </body>
 </html>
 
