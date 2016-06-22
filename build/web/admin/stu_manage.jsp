@@ -18,6 +18,7 @@
 <script src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
 <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="/Volunteer_Sys_test/js/layer/layer.js"></script>
+
 </head>
 <body>
     <nav class="navbar navbar-default">
@@ -61,8 +62,8 @@
                         </ul>
                     </li>
                 </ul>
-            </div>
-        </div>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
     </nav>
     <div class="container">
         <div class="row">
