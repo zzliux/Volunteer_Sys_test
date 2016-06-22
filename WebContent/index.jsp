@@ -62,7 +62,7 @@
     <div class="container" id="ctn">
     </div>
     <script>
-        var load = layer.msg('加载中', {icon: 16});
+        var ind = layer.msg('加载中', {icon: 16});
         $.ajax({
             url:'/Volunteer_Sys_test/servlet/indexInfo',
             dataType:'json',
@@ -73,7 +73,7 @@
                     out += '<div class="col-sm-4"><div class="panel panel-default"><div class="panel-heading">' + data[i].act_title + '<a href="./activities?id=' + data[i].act_id + '" style="float:right">查看活动</a></div><div class="panel-body" style="height: 6em;">' + data[i].act_content.substr(0,50) + '</div><ul class="list-group"><li class="list-group-item">' + data[i].act_startTime + ' 至 ' + data[i].act_endTime + '</li></ul></div></div></div></div>';
                 }
                 $('#ctn').html(out);
-                layer.close(load);
+                layer.close(ind);
             },
             error:function(){
                 layer.msg('网络错误，请重新刷新本页');
