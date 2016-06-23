@@ -13,15 +13,14 @@ function submit() {
 	xmlHttp.send('Userid=' + Userid + '&UserName=' + UserName + '&PassWord='
 			+ password + "&CheckCode=" + checkcode);
 	xmlHttp.onreadystatechange = function() {
-		if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+		if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
 			var text = xmlHttp.responseText;
-			//document.getElementById("meg").innerHTML = "登入成功！";
 			alert(text);
-			if(text.indexOf("成功")!=-1){
+			if(text.indexOf("成功")!==-1){
 				window.location.href="index.jsp"; 
 			}else{
 				document.location.reload();
 			}
 		}
-	}
+	};
 }

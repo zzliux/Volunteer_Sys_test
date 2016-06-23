@@ -27,10 +27,10 @@ function submit() {
 			+ '&Tel=' + tel + '&QQ=' + qq + '&Email=' + ema + '&Academy='
 			+ academy + "&CheckCode=" + checkcode);
 	xmlHttp.onreadystatechange = function() {
-		if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+		if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
 			var text = xmlHttp.responseText;
 			document.getElementById("meg").innerHTML = text;
 			reloadCode();
 		}
-	}
+	};
 }
