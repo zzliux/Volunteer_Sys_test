@@ -10,7 +10,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>学生管理页面</title>
-<script type="text/javascript" src="../js/student/admin_getstus.js"></script>
 <script type="text/javascript" src="../js/student/admin_stu_delete.js"></script>
 
 <script type="text/javascript" src="/Volunteer_Sys_test/js/user/logout.js"></script>

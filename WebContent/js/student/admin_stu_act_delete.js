@@ -5,10 +5,10 @@ function stu_act_delete(stu_id,act_id){
 			"application/x-www-form-urlencoded");
 	xmlHttp.send('stu_id='+stu_id+'&act_id='+act_id);
 	xmlHttp.onreadystatechange = function() {
-		if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+		if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
 			var text = xmlHttp.responseText;
 			alert(text);
 			document.location.reload();
 		}
-	}
+	};
 }

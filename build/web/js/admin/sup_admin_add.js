@@ -6,10 +6,8 @@ function admin_add() {
 
 	var xmlHttp = new XMLHttpRequest();
 	xmlHttp.open("POST", '../../servlet/superAdmin', true);
-	xmlHttp.setRequestHeader("Content-Type",
-			"application/x-www-form-urlencoded");
-	xmlHttp.send('adm_username=' + adm_username + '&adm_pwd=' + adm_pwd
-			+ '&academy_id=' + academy_id + '&action=2');
+	xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	xmlHttp.send('adm_username=' + adm_username + '&adm_pwd=' + adm_pwd + '&academy_id=' + academy_id + '&action=2');
 	xmlHttp.onreadystatechange = function() {
 		if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
 			var text = xmlHttp.responseText;
@@ -18,5 +16,5 @@ function admin_add() {
 				location.href = "../../superadmin/adm_manage.jsp";
 			}
 		}
-	}
+	};
 }

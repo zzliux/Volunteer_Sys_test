@@ -6,11 +6,11 @@ function stu_delete(stu_id){
 			"application/x-www-form-urlencoded");
 	xmlHttp.send('stu_id='+stu_id+'&action=0');
 	xmlHttp.onreadystatechange = function() {
-		if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+		if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
 			var text = xmlHttp.responseText;
 			alert(text);
 			document.location.reload();
 			
 		}
-	}
+	};
 }
