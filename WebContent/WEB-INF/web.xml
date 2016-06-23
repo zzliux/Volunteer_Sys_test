@@ -13,10 +13,12 @@
     <servlet-name>Kaptcha</servlet-name>
     <servlet-class>com.google.code.kaptcha.servlet.KaptchaServlet</servlet-class>
   </servlet>
+
   <servlet-mapping>
     <servlet-name>Kaptcha</servlet-name>
     <url-pattern>/randomcode</url-pattern>
   </servlet-mapping>
+
   <servlet>
     <servlet-name>Register</servlet-name>
     <servlet-class>servlet.Register</servlet-class>
@@ -25,6 +27,7 @@
     <servlet-name>Register</servlet-name>
     <url-pattern>/servlet/register</url-pattern>
   </servlet-mapping>
+
   <servlet>
     <servlet-name>Login</servlet-name>
     <servlet-class>servlet.Login</servlet-class>
@@ -33,6 +36,7 @@
     <servlet-name>Login</servlet-name>
     <url-pattern>/servlet/login</url-pattern>
   </servlet-mapping>
+
   <servlet>
     <servlet-name>Logout</servlet-name>
     <servlet-class>servlet.Logout</servlet-class>
@@ -41,6 +45,7 @@
     <servlet-name>Logout</servlet-name>
     <url-pattern>/servlet/logout</url-pattern>
   </servlet-mapping>
+
   <servlet>
     <servlet-name>BasicAct_show</servlet-name>
     <servlet-class>servlet.BasicAct_show</servlet-class>
@@ -49,6 +54,7 @@
     <servlet-name>BasicAct_show</servlet-name>
     <url-pattern>/servlet/basicAct_show</url-pattern>
   </servlet-mapping>
+
   <servlet>
     <servlet-name>Stu_enlist</servlet-name>
     <servlet-class>servlet.Stu_enlist</servlet-class>
@@ -57,7 +63,7 @@
     <servlet-name>Stu_enlist</servlet-name>
     <url-pattern>/servlet/stu_enlist</url-pattern>
   </servlet-mapping>
-  <servlet>
+
   <servlet>
     <servlet-name>Modify_UserPsw</servlet-name>
     <servlet-class>servlet.Modify_UserPsw</servlet-class>
@@ -66,6 +72,7 @@
     <servlet-name>Modify_UserPsw</servlet-name>
     <url-pattern>/servlet/modify_UserPsw</url-pattern>
   </servlet-mapping>
+
   <servlet>
     <servlet-name>User_info</servlet-name>
     <servlet-class>servlet.User_info</servlet-class>
@@ -74,6 +81,7 @@
     <servlet-name>User_info</servlet-name>
     <url-pattern>/servlet/user_info</url-pattern>
   </servlet-mapping>
+
   <servlet>
     <servlet-name>SuperAdmin</servlet-name>
     <servlet-class>servlet.SuperAdmin</servlet-class>
@@ -82,6 +90,7 @@
     <servlet-name>SuperAdmin</servlet-name>
     <url-pattern>/servlet/superAdmin</url-pattern>
   </servlet-mapping>
+
   <servlet>
     <servlet-name>Admin_Stus_show</servlet-name>
     <servlet-class>servlet.Admin_Stus_show</servlet-class>
@@ -90,6 +99,7 @@
     <servlet-name>Admin_Stus_show</servlet-name>
     <url-pattern>/servlet/admin_Stus_show</url-pattern>
   </servlet-mapping>
+
   <servlet>
     <servlet-name>Admin_Stus_update</servlet-name>
     <servlet-class>servlet.Admin_Stus_update</servlet-class>
@@ -98,6 +108,7 @@
     <servlet-name>Admin_Stus_update</servlet-name>
     <url-pattern>/servlet/admin_Stus_update</url-pattern>
   </servlet-mapping>
+
   <servlet>
     <servlet-name>Admin_Acts_show</servlet-name>
     <servlet-class>servlet.Admin_Acts_show</servlet-class>
@@ -106,6 +117,7 @@
     <servlet-name>Admin_Acts_show</servlet-name>
     <url-pattern>/servlet/admin_Acts_show</url-pattern>
   </servlet-mapping>
+
   <servlet>
     <servlet-name>Adimn_Acts_update</servlet-name>
     <servlet-class>servlet.Admin_Acts_update</servlet-class>
@@ -114,6 +126,7 @@
     <servlet-name>Adimn_Acts_update</servlet-name>
     <url-pattern>/servlet/admin_Acts_update</url-pattern>
   </servlet-mapping>
+
   <servlet>
     <servlet-name>Admin_Stu_Act_delete</servlet-name>
     <servlet-class>servlet.Admin_Stu_Act_delete</servlet-class>
@@ -122,6 +135,7 @@
     <servlet-name>Admin_Stu_Act_delete</servlet-name>
     <url-pattern>/servlet/admin_Stu_Act_delete</url-pattern>
   </servlet-mapping>
+
   <servlet>
     <servlet-name>FileDelete</servlet-name>
     <servlet-class>servlet.FileDelete</servlet-class>

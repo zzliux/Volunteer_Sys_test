@@ -1,5 +1,6 @@
 package JSON;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.text.ParseException;
 import java.util.HashMap;
@@ -60,8 +61,7 @@ public class JsonHelper {
     /**
      * 将Json对象转换成Map
      * 
-     * @param jsonObject
-     *            json对象
+     * @param jsonString
      * @return Map对象
      * @throws JSONException
      */
@@ -100,11 +100,9 @@ public class JsonHelper {
 
     /**
      * 将Map转换成Javabean
-     * 
-     * @param javabean
-     *            javaBean
-     * @param data
-     *            Map数据
+     * @param javabean javaBean
+     * @param data Map数据
+     * @return 
      */
     public static Object toJavaBean(Object javabean, Map data) {
 
@@ -124,9 +122,9 @@ public class JsonHelper {
                     });
 
                 }
-            } catch (Exception e) {
+            } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+                
             }
-
         }
 
         return javabean;
@@ -136,11 +134,9 @@ public class JsonHelper {
     /**
      * JSONObject到JavaBean
      * 
-     * @param bean
-     *            javaBean
-     * @return json对象
-     * @throws ParseException
-     *             json解析异常
+     * @param javabean
+     * @param jsonString
+     * @throws ParseException json解析异常
      * @throws JSONException
      */
     public static void toJavaBean(Object javabean, String jsonString)

@@ -47,13 +47,8 @@ public class DBConn {
 					ps.setInt(i + 1, (int) Parameters[i]);
 				}
 			}
-			if (ps.executeUpdate() == 0) {
-				return false;
-			} else {
-				return true;
-			}
+            return ps.executeUpdate() != 0;
 		} catch (Exception e) {
-			e.printStackTrace();
 			return false;
 		}
 
