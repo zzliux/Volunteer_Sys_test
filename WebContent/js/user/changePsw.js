@@ -11,13 +11,13 @@ function submit() {
 	xmlHttp.send('oldPsw=' + oldPsw + '&newPsw=' + newPsw + '&ConfirmPwd='
 			+ ConfirmPwd);
 	xmlHttp.onreadystatechange = function() {
-		if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+		if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
 			var text = xmlHttp.responseText;
 			// document.getElementById("meg").innerHTML = "登入成功！";
 			alert(text);
-			if(text=="修改成功"){
+			if(text === "修改成功"){
 				window.location.href="../index.jsp";
 			}
 		}
-	}
+	};
 }
