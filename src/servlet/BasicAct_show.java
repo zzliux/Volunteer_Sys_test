@@ -22,15 +22,17 @@ public class BasicAct_show extends HttpServlet {
         super();
     }
 
+    @Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
 
+    @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		int act_id;
 		try {
 			act_id = Integer.parseInt(request.getParameter("act_id"));
@@ -41,11 +43,10 @@ public class BasicAct_show extends HttpServlet {
 				sb.append("error");
 			}
 		} catch (Exception e) {
-//			e.printStackTrace();
-//			response.sendRedirect("../error.html");
 			sb.append("error");
 		}
-		PrintWriter pw = response.getWriter();
+		PrintWriter pw;
+        pw = response.getWriter();
 		pw.print(sb.toString());
 		pw.close();
 	}

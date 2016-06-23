@@ -12,15 +12,14 @@ public class act_enlist {
 		//查询该活动是否已经报满
 		Activity act = info_Query.actQuery(act_id);
 		//如果实际人数等于报名人数，
-		if(act.getAct_actual_enrollment()==act.getAct_enrollment()){
+		if(act.getAct_actual_enrollment() == act.getAct_enrollment()){
 			return 3;
 		}
 		DBConn db = null;
 		try {
 			//查询该学生报名的活动
 			db = new DBConn();
-			ResultSet rs = db.executeQuery(
-					"SELECT * FROM `act_stu_relation` WHERE stu_id=?", stu_id);
+			ResultSet rs = db.executeQuery("SELECT * FROM `act_stu_relation` WHERE stu_id=?", stu_id);
 			while (rs.next()) {
 				//检测是否已经报名
 				if(rs.getInt(1)==act_id){
@@ -36,7 +35,6 @@ public class act_enlist {
 				return 0;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 			return 0;
 		} finally {
 			db.close();

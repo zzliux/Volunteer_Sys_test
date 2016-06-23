@@ -13,15 +13,8 @@ public class userPsw_Change {
 		newPsw = MD5Util.MD5("Yb6CwCWP2rh1veRyn5SgCC4vHTE5Awlp" + aut + newPsw);
 		try {
 			db = new DBConn();
-			if (db.execute(
-					"UPDATE `students` SET `stu_pwd`=? WHERE (`stu_account`=?)",
-					newPsw, aut)) {
-				return true;
-			} else {
-				return false;
-			}
+            return db.execute("UPDATE `students` SET `stu_pwd`=? WHERE (`stu_account`=?)", newPsw, aut);
 		} catch (Exception e) {
-//			e.printStackTrace();
 			return false;
 		} finally {
 			db.close();
@@ -34,15 +27,8 @@ public class userPsw_Change {
 		newPsw = MD5Util.MD5("Yb6CwCWP2rh1veRyn5SgCC4vHTE5Awlp" + uName + newPsw);
 		try {
 			db = new DBConn();
-			if (db.execute(
-					"UPDATE `admins` SET `adm_pwd`=? WHERE (`adm_username`=?)",
-					newPsw, uName)) {
-				return true;
-			} else {
-				return false;
-			}
+            return db.execute( "UPDATE `admins` SET `adm_pwd`=? WHERE (`adm_username`=?)", newPsw, uName);
 		} catch (Exception e) {
-//			e.printStackTrace();
 			return false;
 		} finally {
 			db.close();
@@ -55,15 +41,8 @@ public class userPsw_Change {
 		newPsw = MD5Util.MD5("Yb6CwCWP2rh1veRyn5SgCC4vHTE5Awlp" + uName + newPsw);
 		try {
 			db = new DBConn();
-			if (db.execute(
-					"UPDATE `superadmin` SET `super_pwd`=? WHERE (`super_username`=?)",
-					newPsw, uName)) {
-				return true;
-			} else {
-				return false;
-			}
+            return db.execute("UPDATE `superadmin` SET `super_pwd`=? WHERE (`super_username`=?)",newPsw, uName);
 		} catch (Exception e) {
-//			e.printStackTrace();
 			return false;
 		} finally {
 			db.close();

@@ -25,23 +25,23 @@ public class Admin_Stus_show extends HttpServlet {
 		super();
 	}
 
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+    @Override
+	protected void doGet(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException {
+        doPost(request, response);
 	}
 
+    @Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		int userid = cn.edu.hnuc.volunteer_Sys.util.checkLogin.checkL(request,
 				response);
 		//只能普通管理员查看本院学生信息
 		if(userid==2){
 			sb.append("[");
-			String adm_username = (String) request.getSession().getAttribute(
-					"adm_username");// 获取管理员账号
+			String adm_username = (String) request.getSession().getAttribute("adm_username");// 获取管理员账号
 			int academy_id = info_Query.admQuery(adm_username).getAcademy_id();
 			ArrayList<Students> students = info_Query.stusQuery(academy_id);
 			for (int i = 0; i < students.size(); i++) {
@@ -54,7 +54,8 @@ public class Admin_Stus_show extends HttpServlet {
 		}else{
 			sb.append("empty");
 		}
-		PrintWriter pw = response.getWriter();
+		PrintWriter pw;
+        pw = response.getWriter();
 		pw.print(sb.toString());
 		pw.close();
 	}

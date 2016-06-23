@@ -23,11 +23,13 @@ public class Stu_enlist extends HttpServlet {
 		super();
 	}
 
+    @Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
 
+    @Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
@@ -35,7 +37,7 @@ public class Stu_enlist extends HttpServlet {
 
 		int userid = cn.edu.hnuc.volunteer_Sys.util.checkLogin.checkL(request,
 				response);
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		// 只有学生才能报名
 		if (userid == 1) {
 			// 获取学生id
@@ -46,24 +48,28 @@ public class Stu_enlist extends HttpServlet {
 			try {
 				act_id = Integer.parseInt(request.getParameter("act_id"));
 				int msg = act_enlist.enlist(stu_id, act_id);
-				if (msg == 1) {
-					sb.append("报名成功！");
-				} else if (msg == 2) {
-					sb.append("你已报名！");
-				} else if(msg==3){
-					sb.append("该活动报名已满！");
-				}else{
-					sb.append("报名失败");
-				}
+                switch (msg) {
+                    case 1:
+                        sb.append("报名成功！");
+                        break;
+                    case 2:
+                        sb.append("你已报名！");
+                        break;
+                    case 3:
+                        sb.append("该活动报名已满！");
+                        break;
+                    default:
+                        sb.append("报名失败");
+                        break;
+                }
 			} catch (Exception e) {
-				e.printStackTrace();
 				sb.append("error");
 			}
 		} else {
 			sb.append("error");
 		}
-		//System.out.println(sb.toString());
-		PrintWriter pw = response.getWriter();
+		PrintWriter pw;
+        pw = response.getWriter();
 		pw.print(sb.toString());
 		pw.close();
 	}

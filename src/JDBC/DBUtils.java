@@ -36,9 +36,6 @@ public class DBUtils {
 	public static Connection getConnection() {
 		Connection conn = null;
 		try {
-			// System.out.println(URL);
-			// System.out.println(USERNAME);
-			// System.out.println(PASSWORD);
 			conn = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
@@ -47,20 +44,5 @@ public class DBUtils {
 		return conn;
 	}
 
-//	public static void close(ResultSet rs, Statement st, Connection conn) {
-//		try {
-//			if (rs != null) {
-//				rs.close();
-//			}
-//			if (st != null) {
-//				st.close();
-//			}
-//			if (conn != null) {
-//				conn.close();
-//			}
-//		} catch (SQLException e) {
-//			System.out.println(e.getMessage());
-//		}
-//	}
 
 }

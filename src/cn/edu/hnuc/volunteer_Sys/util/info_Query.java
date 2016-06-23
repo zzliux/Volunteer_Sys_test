@@ -21,8 +21,7 @@ public class info_Query {
 		DBConn db = null;
 		try {
 			db = new DBConn();
-			ResultSet rs = db.executeQuery(
-					"SELECT * FROM `academy` WHERE aca_id=?", aca_id);
+			ResultSet rs = db.executeQuery("SELECT * FROM `academy` WHERE aca_id=?", aca_id);
 			while (rs.next()) {
 				aca.setAca_id(aca_id);
 				aca.setAca_name(rs.getString(2));
@@ -30,11 +29,9 @@ public class info_Query {
 				aca.setAca_phone(rs.getString(4));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 			return null;
 		} finally {
 			db.close();
-			// System.out.println("关闭成功");
 		}
 		return aca;
 	}
@@ -46,8 +43,7 @@ public class info_Query {
 		DBConn db = null;
 		try {
 			db = new DBConn();
-			ResultSet rs = db.executeQuery(
-					"SELECT * FROM `students` WHERE stu_id=?", stu_id);
+			ResultSet rs = db.executeQuery("SELECT * FROM `students` WHERE stu_id=?", stu_id);
 			while (rs.next()) {
 				s.setStu_id(rs.getInt(1));
 				s.setStu_account(rs.getString(2));
@@ -59,11 +55,9 @@ public class info_Query {
 				s.setStu_email(rs.getString(9));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 			return null;
 		} finally {
 			db.close();
-			// System.out.println("关闭成功");
 		}
 		return s;
 	}
@@ -75,8 +69,7 @@ public class info_Query {
 		DBConn db = null;
 		try {
 			db = new DBConn();
-			ResultSet rs = db.executeQuery(
-					"SELECT * FROM `students` WHERE stu_account=?", Account);
+			ResultSet rs = db.executeQuery("SELECT * FROM `students` WHERE stu_account=?", Account);
 			while (rs.next()) {
 				s.setStu_id(rs.getInt(1));
 				s.setStu_account(rs.getString(2));
@@ -87,15 +80,12 @@ public class info_Query {
 				s.setAcademy_id(rs.getInt(8));
 				s.setStu_email(rs.getString(9));
 				s.setActList(act_Stu_Query(s));
-				s.setAcademy_info(JsonHelper.toJSON(acaIdQuery(s
-						.getAcademy_id())));
+				s.setAcademy_info(JsonHelper.toJSON(acaIdQuery(s.getAcademy_id())));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 			return null;
 		} finally {
 			db.close();
-			// System.out.println("关闭成功");
 		}
 		return s;
 	}
@@ -125,7 +115,6 @@ public class info_Query {
 				}
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 			return null;
 		} finally {
 			db.close();
@@ -152,7 +141,6 @@ public class info_Query {
 				a.setAcademy_info(acaIdQuery(a.getAcademy_id()));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 			return null;
 		} finally {
 			db.close();
@@ -165,10 +153,7 @@ public class info_Query {
 		DBConn db = null;
 		try {
 			db = new DBConn();
-			ResultSet rs = db
-					.executeQuery(
-							"SELECT * FROM `admins` WHERE academy_id=?",
-							academy_id);
+			ResultSet rs = db.executeQuery("SELECT * FROM `admins` WHERE academy_id=?", academy_id);
 			while (rs.next()) {
 				a = new Admins();
 				a.setAdm_id(rs.getInt(1));
@@ -176,7 +161,6 @@ public class info_Query {
 				a.setAcademy_id(rs.getInt(4));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 			return null;
 		} finally {
 			db.close();
@@ -200,7 +184,6 @@ public class info_Query {
 				admins.add(adm);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 		} finally {
 			db.close();
 		}
@@ -220,7 +203,6 @@ public class info_Query {
 				enrollment++;
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 			return 0;
 		} finally {
 			db.close();
@@ -253,11 +235,9 @@ public class info_Query {
 				act.setAct_imgurl(rs.getString(8));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 			return null;
 		} finally {
 			db.close();
-			// System.out.println("关闭成功");
 		}
 		return act;
 	}
@@ -282,11 +262,9 @@ public class info_Query {
                     act.setAct_enrollment(rs.getInt(9));// 该活动报名人数上限
                     act.setStuList(act_Stu_Query(act));// 报名的学生
                     act.setAct_actual_enrollment(act.getStuList().size());// 报名人数
-//                    act.setAcademy_info(JsonHelper.toJSON(acaIdQuery(act.getAcademy_id())));// 学院信息
                     acts.add(act);
                 }
             }catch(SQLException e){
-                e.printStackTrace();
                 return null;
             } finally {
                 db.close();
@@ -316,7 +294,6 @@ public class info_Query {
 					act.setAct_status(info_Update.updateActstatus(
 							act.getAct_startTime(), act.getAct_endTime()));// 活动状态
 					act.setAct_enrollment(rs.getInt(9));// 该活动报名人数上限
-					// act.setAct_imgurl(rs.getString(8));
 					act.setStuList(act_Stu_Query(act));// 报名的学生
 					act.setAct_actual_enrollment(act.getStuList().size());// 报名人数
 					act.setAcademy_info(JsonHelper.toJSON(acaIdQuery(act
@@ -326,7 +303,6 @@ public class info_Query {
 
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 			return null;
 		} finally {
 			db.close();
@@ -334,41 +310,6 @@ public class info_Query {
 		return activities;
 	}
 	
-	// 超级管理员查看全部活动，但不能进行修改活动，此方法已不用
-//	@SuppressWarnings("unchecked")
-//	public static ArrayList<Activity> actsQuery() {
-//		ArrayList<Activity> activities = new ArrayList<Activity>();
-//		DBConn db = null;
-//		ResultSet rs = null;
-//		try {
-//			db = new DBConn();
-//			rs = db.executeQuery("SELECT * FROM `activity`");
-//			while (rs.next()) {
-//				Activity act = new Activity();
-//				act.setAct_id(rs.getInt(1));
-//				act.setAct_title(rs.getString(2));
-//				act.setAct_content(rs.getString(3));
-//				act.setAct_startTime(rs.getDate(4));
-//				act.setAct_endTime(rs.getDate(5));
-//				act.setAcademy_id(rs.getInt(6));
-//				act.setAct_status(info_Update.updateActstatus(
-//						act.getAct_startTime(), act.getAct_endTime()));// 活动状态
-//				act.setAct_enrollment(rs.getInt(9));// 该活动报名人数上限
-//				// act.setAct_imgurl(rs.getString(8));
-//				act.setStuList(act_Stu_Query(act));// 报名的学生
-//				act.setAct_actual_enrollment(act.getStuList().size());// 报名人数
-//				act.setAcademy_info(JsonHelper.toJSON(acaIdQuery(act
-//						.getAcademy_id())));// 学院信息
-//				activities.add(act);
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			return null;
-//		} finally {
-//			db.close();
-//		}
-//		return activities;
-//	}
 
 	// -------------------------------------------这里是关联查询，由活动id查询学生以及由学生id查询活动----------------------------------------------
 	// 关联查询 学生——活动
@@ -383,18 +324,14 @@ public class info_Query {
 			int stu_id = s.getStu_id();
 			try {
 				db = new DBConn();
-				ResultSet rs = db.executeQuery(
-						"SELECT * FROM `act_stu_relation` WHERE stu_id=?",
-						stu_id);
+				ResultSet rs = db.executeQuery("SELECT * FROM `act_stu_relation` WHERE stu_id=?",stu_id);
 				while (rs.next()) {
 					activities.add(actQuery(rs.getInt(1)));
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();
 				return null;
 			} finally {
 				db.close();
-				// System.out.println("关闭成功");
 			}
 			return activities;
 		} else if (obj.getClass().getName()
@@ -405,18 +342,14 @@ public class info_Query {
 			DBConn db = null;
 			try {
 				db = new DBConn();
-				ResultSet rs = db.executeQuery(
-						"SELECT * FROM `act_stu_relation` WHERE act_id=?",
-						act_id);
+				ResultSet rs = db.executeQuery("SELECT * FROM `act_stu_relation` WHERE act_id=?",act_id);
 				while (rs.next()) {
 					students.add(stuIdQuery(rs.getInt(2)));
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();
 				return null;
 			} finally {
 				db.close();
-				// System.out.println("关闭成功");
 			}
 			return students;
 		}
@@ -429,19 +362,15 @@ public class info_Query {
 		DBConn db = null;
 		try {
 			db = new DBConn();
-			ResultSet rs = db.executeQuery(
-					"SELECT * FROM `superadmin` WHERE super_username=?",
-					superUname);
+			ResultSet rs = db.executeQuery("SELECT * FROM `superadmin` WHERE super_username=?",superUname);
 			while (rs.next()) {
 				sup.setSup_id(rs.getInt(1));
 				sup.setSup_name(rs.getString(2));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
 			return null;
 		} finally {
 			db.close();
-			// System.out.println("关闭成功");
 		}
 		return sup;
 	}

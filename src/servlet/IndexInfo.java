@@ -15,7 +15,6 @@ import cn.edu.hnuc.volunteer_Sys.entity.Activity;
 import cn.edu.hnuc.volunteer_Sys.util.info_Query;
 
 /**
- *
  * @author zzliux
  */
 @WebServlet("/index_show")
@@ -24,16 +23,21 @@ public class IndexInfo extends HttpServlet {
     public IndexInfo(){
         super();
     }
+
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
         doPost(req, res);
     }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
         req.setCharacterEncoding("utf-8");
         res.setCharacterEncoding("utf-8");
         StringBuilder sb = new StringBuilder();
         ArrayList<Activity> acts = info_Query.actsQuery();
         sb.append( (new Gson()).toJson(acts));
-        PrintWriter pw = res.getWriter();
+        PrintWriter pw;
+        pw = res.getWriter();
         pw.print(sb.toString());
         pw.close();
     }

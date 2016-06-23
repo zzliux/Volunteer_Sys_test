@@ -23,11 +23,13 @@ public class SuperAdmin extends HttpServlet {
 		super();
 	}
 
+    @Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
 
+    @Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
@@ -43,28 +45,32 @@ public class SuperAdmin extends HttpServlet {
 			try {
 				action = request.getParameter("action");
 			} catch (Exception e) {
-				// System.out.println("用户没有提交action");
 				updatemsg = "error";
 			}
 			// 0表示执行删除操作，1表示执行修改操作，2表示添加操作
 			if (action != null) {
-				// System.out.println(action);
-				if (action.equals("0")) {
-					updatemsg = delete(request);
-				} else if (action.equals("1")) {
-					updatemsg = update(request);
-				} else if (action.equals("2")) {
-					updatemsg = add(request);
-				} else {
-					updatemsg = "error！";
-				}
+                switch (action) {
+                    case "0":
+                        updatemsg = delete(request);
+                        break;
+                    case "1":
+                        updatemsg = update(request);
+                        break;
+                    case "2":
+                        updatemsg = add(request);
+                        break;
+                    default:
+                        updatemsg = "error！";
+                        break;
+                }
 			} else {
 				updatemsg = "error！";
 			}
 		} else {
 			updatemsg = "请登入！";
 		}
-		PrintWriter pw = response.getWriter();
+		PrintWriter pw;
+        pw = response.getWriter();
 		pw.print(updatemsg);
 		pw.close();
 	}
@@ -92,7 +98,6 @@ public class SuperAdmin extends HttpServlet {
 				return "该管理员账号已存在,请重新输入账号！";
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 			return "添加失败";
 		}
 
@@ -123,7 +128,6 @@ public class SuperAdmin extends HttpServlet {
 				return "该管理员账号已存在,请重新输入账号！";
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 			return "修改失败！";
 		}
 	}
@@ -139,25 +143,19 @@ public class SuperAdmin extends HttpServlet {
 				return "删除失败";
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 			return "删除失败";
 		}
 	}
 
 	// 检测管理员账号是否存在
 	private boolean CheckUname(String adm_uname) {
-		if (info_Query.admQuery(adm_uname) == null) {
-			return true;
-		}
-		return false;
+		return info_Query.admQuery(adm_uname) == null;
 	}
 
 	// 检测学院是否已设置管理员
 	private boolean CheckAca(int aca_id) {
-		// 该管理员账号不存在，且该学院没有设置管理员
-		if (info_Query.adm_acaQuery(aca_id)==null) {
-			return true;
-		}
-		return false;
+        // 该管理员账号不存在，且该学院没有设置管理员
+		return info_Query.adm_acaQuery(aca_id)==null;
 	}
+
 }

@@ -27,20 +27,19 @@ public class Register extends HttpServlet {
 		super();
 	}
 
+    @Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
 
-	// 'UserName=' + username + 'Account=' + account
-	// + 'PassWord+' + password + 'Confirm_Password=' + conpsw
-	// + "Gender=" + gender + 'Tel=' + tel + 'QQ' + qq + 'Email=' + ema
+    @Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 
 		String UserName = null;
 		int Academy = 0;
@@ -64,25 +63,12 @@ public class Register extends HttpServlet {
 			QQ = request.getParameter("QQ");
 			Email = request.getParameter("Email");
 			CheckCode = request.getParameter("CheckCode");
-//			 System.out.println(UserName);
-			// System.out.println(Academy);
-			// System.out.println(Account);
-			// System.out.println(PassWord);
-			// System.out.println(Confirm_Password);
-//			 System.out.println(Gender);
-			// System.out.println(Tel);
-			// System.out.println(QQ);
-			// System.out.println(Email);
-			// student = new Students(Account, PassWord, UserName, Gender, Tel,
-			// QQ,Academy , Email);
-
 		} catch (Exception e) {
 			response.sendRedirect("../register.jsp");
 		}
 		// 获取正确的验证码
 		String ccode = (String) request.getSession().getAttribute(
 				Constants.KAPTCHA_SESSION_KEY);
-		// System.out.println(ccode+","+CheckCode);
 		if (ccode.equals(CheckCode)) {
 			String msg = info_Check.regCheck(UserName, Academy, Account, PassWord,
 					Confirm_Password, Gender, Tel, QQ, Email);
@@ -92,10 +78,7 @@ public class Register extends HttpServlet {
 					// 密码加密后保存
 					PassWord = MD5Util.MD5("Yb6CwCWP2rh1veRyn5SgCC4vHTE5Awlp"
 							+ Account + PassWord);
-					if (db.execute(
-							"INSERT INTO students(stu_account,stu_pwd,stu_name,stu_sex,stu_phone,stu_qq,academy_id,stu_email)values(?,?,?,?,?,?,?,?)",
-							Account, PassWord, UserName, Gender, Tel, QQ,
-							Academy, Email)) {
+					if (db.execute("INSERT INTO students(stu_account,stu_pwd,stu_name,stu_sex,stu_phone,stu_qq,academy_id,stu_email)values(?,?,?,?,?,?,?,?)", Account, PassWord, UserName, Gender, Tel, QQ, Academy, Email)) {
 						sb.append("注册成功!");
 					}
 				} else {
@@ -107,7 +90,8 @@ public class Register extends HttpServlet {
 		} else {
 			sb.append("验证码错误！");
 		}
-		PrintWriter pw = response.getWriter();
+		PrintWriter pw;
+        pw = response.getWriter();
 		pw.print(sb.toString());
 		pw.close();
 	}
@@ -117,16 +101,10 @@ public class Register extends HttpServlet {
 			DBConn db = new DBConn();
 			ResultSet rs = db.executeQuery(
 					"SELECT * FROM `students` WHERE stu_account=?", Account);
-			if (rs.next()) {
-				return false;
-			} else {
-				return true;
-			}
+            return !rs.next();
 		} catch (Exception e) {
-			// System.out.println(e.getMessage());
 			return false;
 		}
-
 	}
 
 }

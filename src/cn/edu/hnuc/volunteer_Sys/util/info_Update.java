@@ -16,16 +16,8 @@ public class info_Update {
 		DBConn db = null;
 		try {
 			db = new DBConn();
-			if (db.execute(
-					"INSERT INTO `activity` (`act_title`, `act_content`, `act_startTime`, `act_endTime`, `academy_id`,`act_status`,`act_enrollment`) VALUES (?,?,?,?,?,?,?)",
-					act_title, act_content, act_startTime, act_endTime,
-					academy_id, act_status, act_enrollment)) {
-				return true;
-			} else {
-				return false;
-			}
+            return db.execute("INSERT INTO `activity` (`act_title`, `act_content`, `act_startTime`, `act_endTime`, `academy_id`,`act_status`,`act_enrollment`) VALUES (?,?,?,?,?,?,?)", act_title, act_content, act_startTime, act_endTime, academy_id, act_status, act_enrollment);
 		} catch (Exception e) {
-			e.printStackTrace();
 			return false;
 		} finally {
 			db.close();
@@ -39,7 +31,6 @@ public class info_Update {
 			int aca_id = info_Query.actQuery(act_id).getAcademy_id();
 			// 如果不是本院活动，不能删除
 			if (aca_id != academy_id) {
-				//System.out.println("不是本活动的管理员");
 				return false;
 			}
 			DBConn db = null;
@@ -47,20 +38,14 @@ public class info_Update {
 				db = new DBConn();
 				//删除关联表中参加该活动的学生
 				db.execute("DELETE FROM `act_stu_relation` WHERE (`act_id`=?)",act_id);
-				//删除该活动
-				if (db.execute("DELETE FROM `activity` WHERE (`act_id`=?)",act_id)) {
-						return true;
-					} else {
-						return false;
-					}
+                //删除该活动
+                return db.execute("DELETE FROM `activity` WHERE (`act_id`=?)",act_id);
 			} catch (Exception e) {
-				e.printStackTrace();
 				return false;
 			} finally {
 				db.close();
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 			return false;
 		}
 	}
@@ -81,22 +66,13 @@ public class info_Update {
 			// 求出活动状态
 			act_status = updateActstatus(act_startTime, act_endTime);
 		} catch (Exception e) {
-			e.printStackTrace();
 			return false;
 		}
 		DBConn db = null;
 		try {
 			db = new DBConn();
-			if (db.execute(
-					"UPDATE `activity` SET `act_title`=?, `act_content`=?, `act_startTime`=?, `act_endTime`=?, `academy_id`=?, `act_status`=? ,`act_enrollment`=? WHERE (`act_id`=?)",
-					act_title, act_content, act_startTime, act_endTime,
-					academy_id, act_status, act_enrollment, act_id)) {
-				return true;
-			} else {
-				return false;
-			}
+            return db.execute("UPDATE `activity` SET `act_title`=?, `act_content`=?, `act_startTime`=?, `act_endTime`=?, `academy_id`=?, `act_status`=? ,`act_enrollment`=? WHERE (`act_id`=?)", act_title, act_content, act_startTime, act_endTime, academy_id, act_status, act_enrollment, act_id);
 		} catch (Exception e) {
-			e.printStackTrace();
 			return false;
 		} finally {
 			db.close();
@@ -121,23 +97,15 @@ public class info_Update {
 
 	// ---------------------------------------------普通管理员的增删改-------------------------------------------------------------------------
 	// 增加普通管理员
-	public static boolean addAdmin(String adm_username, String adm_pwd,
-			int academy_id) {
+	public static boolean addAdmin(String adm_username, String adm_pwd, int academy_id) {
 		DBConn db = null;
 		try {
 			// 使用MD将密码加密
 			adm_pwd = MD5Util.MD5("Yb6CwCWP2rh1veRyn5SgCC4vHTE5Awlp"
 					+ adm_username + adm_pwd);
 			db = new DBConn();
-			if (db.execute(
-					"INSERT INTO `admins` (`adm_username`, `adm_pwd`, `academy_id`) VALUES (?,?,?)",
-					adm_username, adm_pwd, academy_id)) {
-				return true;
-			} else {
-				return false;
-			}
+            return db.execute("INSERT INTO `admins` (`adm_username`, `adm_pwd`, `academy_id`) VALUES (?,?,?)", adm_username, adm_pwd, academy_id);
 		} catch (Exception e) {
-			e.printStackTrace();
 			return false;
 		} finally {
 			db.close();
@@ -150,18 +118,10 @@ public class info_Update {
 		DBConn db = null;
 		try {
 			// 使用MD将密码加密
-			adm_pwd = MD5Util.MD5("Yb6CwCWP2rh1veRyn5SgCC4vHTE5Awlp"
-					+ adm_username + adm_pwd);
+			adm_pwd = MD5Util.MD5("Yb6CwCWP2rh1veRyn5SgCC4vHTE5Awlp" + adm_username + adm_pwd);
 			db = new DBConn();
-			if (db.execute(
-					"UPDATE `admins` SET `adm_username`=?, `adm_pwd`=?, `academy_id`=? WHERE (`adm_id`=?)",
-					adm_username, adm_pwd, academy_id, adm_id)) {
-				return true;
-			} else {
-				return false;
-			}
+            return db.execute("UPDATE `admins` SET `adm_username`=?, `adm_pwd`=?, `academy_id`=? WHERE (`adm_id`=?)",adm_username, adm_pwd, academy_id, adm_id);
 		} catch (Exception e) {
-			e.printStackTrace();
 			return false;
 		} finally {
 			db.close();
@@ -173,13 +133,8 @@ public class info_Update {
 		DBConn db = null;
 		try {
 			db = new DBConn();
-			if (db.execute("DELETE FROM `admins` WHERE (`adm_id`=?)", adm_id)) {
-				return true;
-			} else {
-				return false;
-			}
+            return db.execute("DELETE FROM `admins` WHERE (`adm_id`=?)", adm_id);
 		} catch (Exception e) {
-			e.printStackTrace();
 			return false;
 		} finally {
 			db.close();
@@ -202,19 +157,10 @@ public class info_Update {
 			DBConn db = null;
 			try {
 				// 使用MD5将密码加密
-				stu_pwd = MD5Util.MD5("Yb6CwCWP2rh1veRyn5SgCC4vHTE5Awlp"
-						+ stu_account + stu_pwd);
+				stu_pwd = MD5Util.MD5("Yb6CwCWP2rh1veRyn5SgCC4vHTE5Awlp" + stu_account + stu_pwd);
 				db = new DBConn();
-				if (db.execute(
-						"UPDATE `students` SET `stu_account`=?, `stu_pwd`=?, `stu_name`=?, `stu_sex`=?,`stu_phone`=?,`stu_qq`=?,`academy_id`=?,`stu_email`=? WHERE (`stu_id`=?)",
-						stu_account, stu_pwd, stu_name, stu_sex, stu_phone,
-						stu_qq, academy_id, stu_email, id)) {
-					return true;
-				} else {
-					return false;
-				}
+                return db.execute("UPDATE `students` SET `stu_account`=?, `stu_pwd`=?, `stu_name`=?, `stu_sex`=?,`stu_phone`=?,`stu_qq`=?,`academy_id`=?,`stu_email`=? WHERE (`stu_id`=?)",stu_account, stu_pwd, stu_name, stu_sex, stu_phone,stu_qq, academy_id, stu_email, id);
 			} catch (Exception e) {
-				e.printStackTrace();
 				return false;
 			} finally {
 				db.close();
@@ -238,20 +184,15 @@ public class info_Update {
 			try {
 				db = new DBConn();
 				// 先删除关联表中的(学生——活动)
-				ResultSet rs = db.executeQuery(
-						"SELECT * FROM `act_stu_relation` WHERE (`stu_id`=?)",
-						id);
+				ResultSet rs = db.executeQuery("SELECT * FROM `act_stu_relation` WHERE (`stu_id`=?)",id);
 				if (rs != null) {
-					db.execute(
-							"DELETE FROM `act_stu_relation` WHERE (`stu_id`=?)",
-							id);
+					db.execute("DELETE FROM `act_stu_relation` WHERE (`stu_id`=?)",id);
 					db.execute("DELETE FROM `students` WHERE (`stu_id`=?)", id);
 				} else {
 					db.execute("DELETE FROM `students` WHERE (`stu_id`=?)", id);
 				}
 				return true;
 			} catch (Exception e) {
-				e.printStackTrace();
 				return false;
 			} finally {
 				db.close();
@@ -273,15 +214,8 @@ public class info_Update {
 			DBConn db = null;
 			try {
 				db = new DBConn();
-				if (db.execute(
-						"DELETE FROM `act_stu_relation` WHERE (`act_id`=?) AND (`stu_id`=?)",
-						act_id, id)) {
-					return true;
-				} else {
-					return false;
-				}
+                return db.execute("DELETE FROM `act_stu_relation` WHERE (`act_id`=?) AND (`stu_id`=?)",act_id, id);
 			} catch (Exception e) {
-				e.printStackTrace();
 				return false;
 			} finally {
 				db.close();

@@ -24,17 +24,19 @@ public class SupadmLogin extends HttpServlet {
 		super();
 	}
 
+    @Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
 
+    @Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		if (checkLogin.checkL(request, response) == 0) {
 			String UserName = null;
 			String PassWord = null;
@@ -51,7 +53,6 @@ public class SupadmLogin extends HttpServlet {
 			// 获取正确的验证码
 			String ccode = (String) request.getSession().getAttribute(
 					Constants.KAPTCHA_SESSION_KEY);
-			// System.out.println(ccode+","+CheckCode);
 			if (ccode.equals(CheckCode)) {
 				if (userPsw_Check.checkSupAdm_psw(UserName, PassWord)) {
 					sb.append("超级管理员登入成功！");
@@ -65,8 +66,8 @@ public class SupadmLogin extends HttpServlet {
 		} else {
 			sb.append("您已登入，请注销后再登入！");
 		}
-		// System.out.println(sb.toString());
-		PrintWriter pw = response.getWriter();
+		PrintWriter pw;
+        pw = response.getWriter();
 		pw.print(sb.toString());
 		pw.close();
 	}

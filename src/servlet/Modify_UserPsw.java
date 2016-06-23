@@ -23,11 +23,13 @@ public class Modify_UserPsw extends HttpServlet {
 		super();
 	}
 
+    @Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
 
+    @Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
@@ -46,20 +48,24 @@ public class Modify_UserPsw extends HttpServlet {
 				oldPsw = request.getParameter("oldPsw");
 				newPsw = request.getParameter("newPsw");
 				ConfirmPwd = request.getParameter("ConfirmPwd");
-				if (userid == 1) {
-					// 获取学生学号
-					String aut = (String)request.getSession().getAttribute("stu_account");
-					msg = Stu_Modify_Psw(aut, oldPsw, newPsw, ConfirmPwd);
-				} else if (userid == 2) {
-					// 获取管理员账号
-					String uName = (String)request.getSession().getAttribute("adm_username");
-					msg = Adm_Modify_Psw(uName, oldPsw, newPsw, ConfirmPwd);
-				} else {
-					// 获取超级管理员账号
-					String superUname = (String)request.getSession().getAttribute("superadmin");
-					msg = Superadm_Modify_Psw(superUname, oldPsw, newPsw,
-							ConfirmPwd);
-				}
+                switch (userid) {
+                    case 1:
+                        // 获取学生学号
+                        String aut = (String)request.getSession().getAttribute("stu_account");
+                        msg = Stu_Modify_Psw(aut, oldPsw, newPsw, ConfirmPwd);
+                        break;
+                    case 2:
+                        // 获取管理员账号
+                        String uName = (String)request.getSession().getAttribute("adm_username");
+                        msg = Adm_Modify_Psw(uName, oldPsw, newPsw, ConfirmPwd);
+                        break;
+                    default:
+                        // 获取超级管理员账号
+                        String superUname = (String)request.getSession().getAttribute("superadmin");
+                        msg = Superadm_Modify_Psw(superUname, oldPsw, newPsw,
+                                ConfirmPwd);
+                        break;
+                }
 
 			} catch (Exception e) {
 				msg="error！";
@@ -67,7 +73,8 @@ public class Modify_UserPsw extends HttpServlet {
 		}else{
 			msg="请登入！";
 		}
-		PrintWriter pw = response.getWriter();
+		PrintWriter pw;
+        pw = response.getWriter();
 		pw.print(msg);
 		pw.close();
 	}

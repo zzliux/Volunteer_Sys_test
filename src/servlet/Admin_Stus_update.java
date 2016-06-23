@@ -23,11 +23,12 @@ public class Admin_Stus_update extends HttpServlet {
 		super();
 	}
 
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+    @Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
 
+    @Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
@@ -43,34 +44,35 @@ public class Admin_Stus_update extends HttpServlet {
 			try {
 				action = request.getParameter("action");
 			} catch (Exception e) {
-				//System.out.println("用户没有提交action");
 				updatemsg = "error";
 			}
 			// 0表示执行删除操作，1表示执行修改操作
 			if (action != null) {
-				//System.out.println(action);
-				if (action.equals("0")) {
-					if(delete(request)){
-						updatemsg = "删除成功！";
-					}else{
-						updatemsg = "删除失败！";
-					}
-				} else if (action.equals("1")) {
-					if(update(request)){
-						updatemsg = "修改成功！";
-					}else{
-						updatemsg = "修改失败！";
-					}
-				} else {
-					updatemsg = "error";
-				}
+                switch (action) {
+                    case "0":
+                        if(delete(request)){
+                            updatemsg = "删除成功！";
+                        }else{
+                            updatemsg = "删除失败！";
+                        }   break;
+                    case "1":
+                        if(update(request)){
+                            updatemsg = "修改成功！";
+                        }else{
+                            updatemsg = "修改失败！";
+                        }   break;
+                    default:
+                        updatemsg = "error";
+                        break;
+                }
 			} else {
 				updatemsg = "error";
 			}
 		} else {
 			updatemsg = "请登入";
 		}
-		PrintWriter pw = response.getWriter();
+		PrintWriter pw;
+        pw = response.getWriter();
 		pw.print(updatemsg);
 		pw.close();
 	}
@@ -99,11 +101,9 @@ public class Admin_Stus_update extends HttpServlet {
 			stu_qq = request.getParameter("stu_qq");
 			stu_email = request.getParameter("stu_email");
 			// 获取学院号
-			String adm_username = (String) request.getSession().getAttribute(
-					"adm_username");
+			String adm_username = (String) request.getSession().getAttribute("adm_username");
 			academy_id = info_Query.admQuery(adm_username).getAcademy_id();
 		} catch (Exception e) {
-			e.printStackTrace();
 			return false;
 		}
 		return info_Update.updateStu(id, stu_account, stu_pwd, stu_name,
@@ -118,11 +118,9 @@ public class Admin_Stus_update extends HttpServlet {
 			// 获取基本信息
 			id = Integer.parseInt(request.getParameter("stu_id"));
 			// 获取学院号
-			String adm_username = (String) request.getSession().getAttribute(
-					"adm_username");
+			String adm_username = (String) request.getSession().getAttribute("adm_username");
 			academy_id = info_Query.admQuery(adm_username).getAcademy_id();
 		} catch (Exception e) {
-			e.printStackTrace();
 			return false;
 		}
 		return info_Update.deleteStu(id, academy_id);

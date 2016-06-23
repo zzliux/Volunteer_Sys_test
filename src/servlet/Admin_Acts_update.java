@@ -24,13 +24,11 @@ public class Admin_Acts_update extends HttpServlet {
 		super();
 	}
 
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 
@@ -49,35 +47,38 @@ public class Admin_Acts_update extends HttpServlet {
 			}
 			// 0表示执行删除操作，1表示执行修改操作，2表示添加操作
 			if (action != null) {
-				//System.out.println(action);
-				if (action.equals("0")) {
-					if(delete(request)){
-						updatemsg = "删除成功！";
-					}else{
-						updatemsg = "删除失败！";
-					}
-				} else if (action.equals("1")) {
-					if(update(request)){
-						updatemsg = "修改成功！";
-					}else{
-						updatemsg = "修改失败！";
-					}
-				} else if (action.equals("2")) {
-					if(add(request)){
-						updatemsg = "添加成功！";
-					}else{
-						updatemsg = "添加失败！";
-					}
-				} else {
-					updatemsg = "error!";
-				}
+                //System.out.println(action);
+                switch (action) {
+                    case "0":
+                        if(delete(request)){
+                            updatemsg = "删除成功！";
+                        }else{
+                            updatemsg = "删除失败！";
+                        }   break;
+                    case "1":
+                        if(update(request)){
+                            updatemsg = "修改成功！";
+                        }else{
+                            updatemsg = "修改失败！";
+                        }   break;
+                    case "2":
+                        if(add(request)){
+                            updatemsg = "添加成功！";
+                        }else{
+                            updatemsg = "添加失败！";
+                        }   break;
+                    default:
+                        updatemsg = "error!";
+                        break;
+                }
 			} else {
 				updatemsg = "error";
 			}
 		} else {
 			updatemsg = "请登入";
 		}
-		PrintWriter pw = response.getWriter();
+		PrintWriter pw;
+        pw = response.getWriter();
 		pw.print(updatemsg);
 		pw.close();
 	}
@@ -103,40 +104,17 @@ public class Admin_Acts_update extends HttpServlet {
 			endDate = Date.valueOf(request.getParameter("act_endTime"));
 			act_enrollment = Integer.parseInt(request
 					.getParameter("act_enrollment"));
-//			//测试接收数据
-//			System.out.println(id);
-//			System.out.println(title);
-//			System.out.println(content);
-//			System.out.println(startDate.toString());
-//			System.out.println(endDate.toString());
-//			System.out.println(act_enrollment);
-//			
 			
 			
 			// 获取学院号
 			String adm_username = (String) request.getSession().getAttribute(
 					"adm_username");
 			academy_id = info_Query.admQuery(adm_username).getAcademy_id();
-			//---------后台已动态修改活动状态
-			/*
-			// 求出活动状态 ,0表示未开始，1表示正在进行，2表示已结束
-			long nowTime = new java.util.Date().getTime();// 获取当前时间
-			if (startDate.getTime() > nowTime) {
-				act_status = 0;
-			} else if (startDate.getTime() <= nowTime
-					&& nowTime <= endDate.getTime()) {
-				act_status = 1;
-			} else {
-				act_status = 2;
-			}
-			*/
 
 		} catch (Exception e) {
-			e.printStackTrace();
 			return false;
 		}
-		return info_Update.updateAct(id, title, content, startDate, endDate,
-				academy_id, act_enrollment);
+		return info_Update.updateAct(id, title, content, startDate, endDate, academy_id, act_enrollment);
 	}
 
 	// 删除： 前端发送数据：act_Id(活动id)，action(请求行为)
@@ -150,7 +128,6 @@ public class Admin_Acts_update extends HttpServlet {
 					"adm_username");
 			academy_id = info_Query.admQuery(adm_username).getAcademy_id();
 		} catch (Exception e) {
-			//System.out.println("用户没有提交id");
 			return false;
 		}
 		return info_Update.deleteAct(id, academy_id);
@@ -165,47 +142,24 @@ public class Admin_Acts_update extends HttpServlet {
 		Date endDate = null;
 		int academy_id;
 		int act_enrollment;
-		// String act_imgurl = null;
 		try {
 			// 获取基本信息
 			title = request.getParameter("act_title");
 			content = request.getParameter("act_content");
 			startDate = Date.valueOf(request.getParameter("act_startTime"));
 			endDate = Date.valueOf(request.getParameter("act_endTime"));
-			act_enrollment = Integer.parseInt(request
-					.getParameter("act_enrollment"));
-			//测试接收数据
-//			System.out.println(title);
-//			System.out.println(content);
-//			System.out.println(startDate.toString());
-//			System.out.println(endDate.toString());
-//			System.out.println(act_enrollment);
+			act_enrollment = Integer.parseInt(request.getParameter("act_enrollment"));
 			
 			
 			// 获取学院号
 			String adm_username = (String) request.getSession().getAttribute(
 					"adm_username");
 			academy_id = info_Query.admQuery(adm_username).getAcademy_id();
-			//---------后台已动态修改活动状态
-			/*
-			// 求出活动状态
-			long nowTime = new java.util.Date().getTime();// 获取当前时间
-			if (startDate.getTime() > nowTime) {
-				act_status = 0;//活动未开始
-			} else if (startDate.getTime() <= nowTime
-					&& nowTime <= endDate.getTime()) {
-				act_status = 1;//活动正在进行
-			} else {
-				act_status = 2;//活动已结束
-			}
-			*/
 
 		} catch (Exception e) {
-			e.printStackTrace();
 			return false;
 		}
-		return info_Update.addAct(title, content, startDate, endDate,
-				academy_id, act_enrollment);
+		return info_Update.addAct(title, content, startDate, endDate, academy_id, act_enrollment);
 	}
 }
  

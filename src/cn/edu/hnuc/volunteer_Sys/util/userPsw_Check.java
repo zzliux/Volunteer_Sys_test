@@ -19,20 +19,12 @@ public class userPsw_Check {
 				PassWord = MD5Util.MD5("Yb6CwCWP2rh1veRyn5SgCC4vHTE5Awlp"
 						+ UserName + PassWord);
 				String truePsw = rs.getString(3);
-				if (PassWord.equals(truePsw)) {
-					// System.out.println("恭喜！管理员登入成功！");
-				
-				} else {
-					// System.out.println( "密码错误!");
-					msg = false;
-				}
+				if (!PassWord.equals(truePsw))
+                    msg = false;
 			} else {
-				//System.out.println("该账号不存在！");
 				msg = false;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			// System.out.println("该账号不存在！");
 			msg = false;
 		}
 		return msg;
@@ -46,23 +38,14 @@ public class userPsw_Check {
 					"SELECT * FROM `students` WHERE stu_account=?", Account);
 			if (rs.next()) {
 				// 验证密码
-				PassWord = MD5Util.MD5("Yb6CwCWP2rh1veRyn5SgCC4vHTE5Awlp"
-						+ Account + PassWord);
+				PassWord = MD5Util.MD5("Yb6CwCWP2rh1veRyn5SgCC4vHTE5Awlp" + Account + PassWord);
 				String truePsw = rs.getString(3);
-				if (PassWord.equals(truePsw)) {
-					// System.out.println("恭喜！登入成功！");
-				
-				} else {
-					// System.out.println("密码错误!");
-					msg = false;
-				}
+				if (!PassWord.equals(truePsw))
+                    msg = false;
 			} else {
-				// System.out.println("该账号不存在！");
 				msg = false;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			// System.out.println("该账号不存在！");
 			msg = false;
 		}
 		return msg;
@@ -79,19 +62,12 @@ public class userPsw_Check {
 				PassWord = MD5Util.MD5("Yb6CwCWP2rh1veRyn5SgCC4vHTE5Awlp"
 						+ UserName + PassWord);
 				String truePsw = rs.getString(3);
-				if (PassWord.equals(truePsw)) {
-					// System.out.println("恭喜！管理员登入成功！");
-				} else {
-					// System.out.println( "密码错误!");
-					msg = false;
-				}
+				if (!PassWord.equals(truePsw)) 
+                    msg = false;
 			} else {
-				//System.out.println("该账号不存在！");
 				msg = false;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			// System.out.println("该账号不存在！");
 			msg = false;
 		}
 		return msg;

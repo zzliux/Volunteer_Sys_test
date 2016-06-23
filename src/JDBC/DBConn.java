@@ -18,15 +18,11 @@ public class DBConn {
 	// 查询
 	public ResultSet executeQuery(String strSql, Object... Parameters) {
 		try {
-			// System.out.println(strSql);
 			 ps = this.conn.prepareStatement(strSql);
 			for (int i = 0; i < Parameters.length; i++) {
-				// System.out.println(Parameters[i]);
 				if (Parameters[i].getClass().getName().contains("String")) {
-					// System.out.println("String");
 					ps.setString(i + 1, (String) Parameters[i]);
 				} else {
-					// System.out.println("int");
 					ps.setInt(i + 1, (int) Parameters[i]);
 				}
 			}
@@ -41,15 +37,11 @@ public class DBConn {
 	// 插入，删除，修改
 	public boolean execute(String strSql, Object... Parameters) {
 		try {
-			// System.out.println(strSql);
 			ps = this.conn.prepareStatement(strSql);
 			for (int i = 0; i < Parameters.length; i++) {
-				// System.out.println(Parameters[i]+Parameters[i].getClass().getName());
 				if (Parameters[i].getClass().getName().contains("String")) {
-					// System.out.println("String");
 					ps.setString(i + 1, (String) Parameters[i]);
 				} else if(Parameters[i].getClass().getName().contains("java.sql.Date")){
-					// System.out.println("int");
 					ps.setDate(i + 1,(Date) Parameters[i]);
 				}	else{
 					ps.setInt(i + 1, (int) Parameters[i]);

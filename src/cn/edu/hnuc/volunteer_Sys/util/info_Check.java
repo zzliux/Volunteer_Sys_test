@@ -9,8 +9,6 @@ package cn.edu.hnuc.volunteer_Sys.util;
 public class info_Check {
 	private static String regex = null;
 
-	// 测试样例
-	// ("莫丹",1,"140920046","xxmmodd","xxmmodd","女","13838383838","11651561","812966736@qq.com")
 	// 调用方法check表单信息
 
 	// 注册信息校验
@@ -32,8 +30,6 @@ public class info_Check {
 		} else if (!checkPwd(PassWord)) {
 			return("密码必须在6-15个字符！");
 		} else if (!verifyPwd(PassWord, Confirm_Password)) {
-//			System.out.println(PassWord);
-//			System.out.println(Confirm_Password);
 			return("两次密码输入不一致！");
 		} else if (!checkAct(Account)) {
 			return("学号填写错误！");
@@ -45,30 +41,20 @@ public class info_Check {
 	
 	public static boolean modify_Psw_Check(String newPsw,String confirmPwd){
 		if(!checkPwd(newPsw)){
-			System.out.println("密码必须在6-15个字符！");
 			return false;
 		}else if(!verifyPwd(newPsw,confirmPwd)){
-//			System.out.println(newPsw);
-//			System.out.println(confirmPwd);
-			System.out.println("两次密码输出不一致！");
 			return false;
 		}
 		return true;
 	}
 	// 1 ~ 14 (下拉列表)
 	private static boolean checkAcademy(int Academy) {
-		if (Academy > 0 && Academy < 15) {
-			return true;
-		} else {
-			return false;
-		}
+        return Academy > 0 && Academy < 15;
 	}
 
 	// ~~
 	private static boolean checkEmail(String email) {
 
-		// regex =
-		// "^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$";
 		regex = "^\\s*\\w+(?:\\.{0,1}[\\w-]+)*@[a-zA-Z0-9]+(?:[-.][a-zA-Z0-9]+)*\\.[a-zA-Z]+\\s*$";
 		return email.matches(regex);
 	}
@@ -90,26 +76,14 @@ public class info_Check {
 	private static boolean checkGender(String gender) {
 		// 去掉全部空格
 		gender = gender.replaceAll("\\s*", "");
-		if (gender.equals("男") || gender.equals("女")) {
-			return true;
-		} else {
-			return false;
-		}
+        return gender.equals("男") || gender.equals("女");
 	}
 
 	// 检查重复密码是否输入错误
 	private static boolean verifyPwd(String passWord, String confirm_Password) {
 		try {
-			if (!passWord.equals(confirm_Password)) {
-				/*System.out.println(passWord);
-				System.out.println(confirm_Password);*/
-				//System.out.println("两次输入的密码不一致！");
-				return false;
-			} else {
-				return true;
-			}
+            return passWord.equals(confirm_Password);
 		} catch (Exception e) {
-			// System.out.println(e.toString());
 			return false;
 		}
 	}
