@@ -2,7 +2,7 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
     if(checkLogin.checkL(request, response)==0){
-    	response.sendRedirect("../login.jsp");
+        response.sendRedirect("../login.jsp");
     }
 %>
 <!DOCTYPE html>
@@ -77,21 +77,21 @@
                                     <input type="password" id="oldPsw" class="form-control" placeholder="原始密码">
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="newPsw" class="control-label col-sm-3">新密码</label>
                                 <div class="col-sm-9">
                                     <input type="password" id="newPsw" class="form-control" placeholder="新密码">
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <label for="ConfirmPwd" class="control-label col-sm-3">确认新密码</label>
                                 <div class="col-sm-9">
                                     <input type="password" id="ConfirmPwd" class="form-control" placeholder="确认新密码">
                                 </div>
                             </div>
-                            
+
                             <div class="form-group">
                                 <div class="col-sm-9 col-sm-offset-3">
                                     <input type="submit" class="btn btn-default btn-block" value="提交">

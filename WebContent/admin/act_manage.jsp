@@ -1,9 +1,9 @@
 <%@page import="cn.edu.hnuc.volunteer_Sys.util.checkLogin"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-	if(checkLogin.checkL(request, response)!=2){
-		response.sendRedirect("../login.jsp");
-	}
+    if(checkLogin.checkL(request, response)!=2){
+        response.sendRedirect("../login.jsp");
+    }
 %>
 <!DOCTYPE html>
 <html>
@@ -18,7 +18,7 @@
 <title>活动管理页面</title>
 <script type="text/javascript">
 function submit() {
-	$('#formFile').submit();
+    $('#formFile').submit();
 }
 </script>
 
@@ -72,20 +72,20 @@ function submit() {
         <div class="panel panel-default">
             <div class="panel-heading">活动管理</div>
             <table class="table" id="table">
-				<tr>
-					<th>#</th>
-					<th>活动标题</th>
-					<th>开始时间</th>
-					<th>结束时间</th>
-					<th>活动状态</th>
-					<th>学院名称</th>
-					<th>学院负责人</th>
-					<th>最大报名人数</th>
-					<th>已报名人数</th>
-					<th>操作</th>
-					<th>操作</th>
+                <tr>
+                    <th>#</th>
+                    <th>活动标题</th>
+                    <th>开始时间</th>
+                    <th>结束时间</th>
+                    <th>活动状态</th>
+                    <th>学院名称</th>
+                    <th>学院负责人</th>
+                    <th>最大报名人数</th>
+                    <th>已报名人数</th>
                     <th>操作</th>
-				</tr>
+                    <th>操作</th>
+                    <th>操作</th>
+                </tr>
             </table>
             <div class="panel-body">
                 <td><a href="./actadd">添加活动</a></td>

@@ -1,21 +1,18 @@
 <%@page import="cn.edu.hnuc.volunteer_Sys.util.info_Query"%>
 <%@page import="cn.edu.hnuc.volunteer_Sys.entity.Activity"%>
 <%@page import="cn.edu.hnuc.volunteer_Sys.util.checkLogin"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%
-	if(checkLogin.checkL(request, response)!=2){
-		response.sendRedirect("../../login.jsp");
-	}else{
-		int act_id;
-		Activity act = null;
-		try{
-			act_id = Integer.parseInt(request.getParameter("act_id"));
-			act = info_Query.actQuery(act_id);
-		
-
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+    if(checkLogin.checkL(request, response)!=2){
+        response.sendRedirect("../../login.jsp");
+    }else{
+        int act_id;
+        Activity act = null;
+        try{
+            act_id = Integer.parseInt(request.getParameter("act_id"));
+            act = info_Query.actQuery(act_id);
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE htm>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -112,16 +109,16 @@
                             <input type="button" onclick="act_update()" class="btn btn-default" value="提交">
                         </div>
                     </div>
-                
+
                 </div>
             </div>
         </div>
     </div>
 </body>
 <%
-		}catch(Exception e){
-			response.sendRedirect("../../login.jsp");
-		}
-	}
+        }catch(Exception e){
+            response.sendRedirect("../../login.jsp");
+        }
+    }
 %>
 </html>

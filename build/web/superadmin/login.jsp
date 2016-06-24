@@ -1,6 +1,6 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="cn.edu.hnuc.volunteer_Sys.util.checkLogin"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" charset="utf-8" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
@@ -11,10 +11,10 @@
 <script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script src="/Volunteer_Sys_test/js/layer/layer.js"></script>
 <script type="text/javascript">
-	function reloadCode() {
-		var time = new Date().getTime();
-		document.getElementById("imagecode").src = "./randomcode?d=" + time;
-	}
+    function reloadCode() {
+        var time = new Date().getTime();
+        document.getElementById("imagecode").src = "./randomcode?d=" + time;
+    }
 </script>
 </head>
 <body>

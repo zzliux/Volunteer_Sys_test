@@ -63,80 +63,78 @@
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
-	<%
-		//检测是否已登入
-		if (checkLogin.checkL(request, response) == 3) {
+        <%
+            //检测是否已登入
+            if (checkLogin.checkL(request, response) == 3) {
         %>
-        
+
         <div class="container">
             <div class="panel panel-default">
                 <div class="panel-heading">普通管理员账号管理</div>
                 <%= showAdmin() %>
             </div>
         </div>
-        
         <%
-			
-		} else {
-			String super_username = null;
-			String super_password = null;
-			String checkcode = null;
+        } else {
+            String super_username = null;
+            String super_password = null;
+            String checkcode = null;
 
-			try {
-				super_username = request.getParameter("UserName");
-				super_password = request.getParameter("PassWord");
-				checkcode = request.getParameter("CheckCode");
-				// 获取正确的验证码
-				String ccode = (String) request.getSession().getAttribute(
-						Constants.KAPTCHA_SESSION_KEY);
-				// System.out.println(ccode+","+CheckCode);
-				if (ccode.equals(checkcode)) {
-					//检测密码
-					if (superadminVerification.checkSupadmin_psw(
-							super_username, super_password)) {
-						//设置超级管理员身份
-						request.getSession().setAttribute("superadmin", super_username);
-						response.sendRedirect("adm_manage.jsp");
-					} else {
-						out.print("<script type=\"text/javascript\">alert(\"用户名或密码错误！\");window.location=\"login.jsp \";</script>");
-					}
-				} else {
-					out.print("<script type=\"text/javascript\">alert(\"验证码错误！\");window.location=\"login.jsp \";</script>");
-				}
+            try {
+                super_username = request.getParameter("UserName");
+                super_password = request.getParameter("PassWord");
+                checkcode = request.getParameter("CheckCode");
+                // 获取正确的验证码
+                String ccode = (String) request.getSession().getAttribute(
+                        Constants.KAPTCHA_SESSION_KEY);
+                // System.out.println(ccode+","+CheckCode);
+                if (ccode.equals(checkcode)) {
+                    //检测密码
+                    if (superadminVerification.checkSupadmin_psw(
+                            super_username, super_password)) {
+                        //设置超级管理员身份
+                        request.getSession().setAttribute("superadmin", super_username);
+                        response.sendRedirect("adm_manage.jsp");
+                    } else {
+                        out.print("<script type=\"text/javascript\">alert(\"用户名或密码错误！\");window.location=\"login.jsp \";</script>");
+                    }
+                } else {
+                    out.print("<script type=\"text/javascript\">alert(\"验证码错误！\");window.location=\"login.jsp \";</script>");
+                }
 
-			} catch (Exception e) {
-				//e.printStackTrace();
-				response.sendRedirect("login.jsp");
-			}
-		}
-	%>
-	<%!public static String showAdmin() {
-		//获取管理员信息
-		ArrayList<Admins> admins = info_Query.adminsQuery();
-		//创建管理员表格
-		int id = 1;//序号
-		StringBuffer sb = new StringBuffer();
-		sb.append("<table class=\"table\">");
-		sb.append("<tr><th>序号</th><th>用户名</th><th>学院</th><th>学院负责人</th><th>联系电话</th><th>操作</th></tr>");
-		for (Admins adm : admins) {
-			sb.append("<tr><td>"
-					+ (id++)
-					+ "</td><td>"
-					+ adm.getAdm_username()
-					+ "</td><td>"
-					+ adm.getAcademy_info().getAca_name()
-					+ "</td><td>"
-					+ adm.getAcademy_info().getAca_man()
-					+ "</td><td>"
-					+ adm.getAcademy_info().getAca_phone()
-					+ "</td><td>"
-					+ "<input type=\"button\" value=\"删除\" class=\"btn btn-default\" onclick=\"admin_delete("
-					+ adm.getAdm_id() + ")\""
-					+ "</td><td>"+
-					"</td></tr>");
-		}
-		sb.append("</table><ul class=\"list-group\"><li class=\"list-group-item\"><a href=\"adminadd\">添加管理员</a></li></ul>");
-		return sb.toString();
-	}%>
+            } catch (Exception e) {
+                //e.printStackTrace();
+                response.sendRedirect("login.jsp");
+            }
+        }
+    %>
+    <%!public static String showAdmin() {
+        //获取管理员信息
+        ArrayList<Admins> admins = info_Query.adminsQuery();
+        //创建管理员表格
+        int id = 1;//序号
+        StringBuffer sb = new StringBuffer();
+        sb.append("<table class=\"table\">");
+        sb.append("<tr><th>序号</th><th>用户名</th><th>学院</th><th>学院负责人</th><th>联系电话</th><th>操作</th></tr>");
+        for (Admins adm : admins) {
+            sb.append("<tr><td>"
+                    + (id++)
+                    + "</td><td>"
+                    + adm.getAdm_username()
+                    + "</td><td>"
+                    + adm.getAcademy_info().getAca_name()
+                    + "</td><td>"
+                    + adm.getAcademy_info().getAca_man()
+                    + "</td><td>"
+                    + adm.getAcademy_info().getAca_phone()
+                    + "</td><td>"
+                    + "<input type=\"button\" value=\"删除\" class=\"btn btn-default\" onclick=\"admin_delete("
+                    + adm.getAdm_id() + ")\""
+                    + "</td><td>"+
+                    "</td></tr>");
+        }
+        sb.append("</table><ul class=\"list-group\"><li class=\"list-group-item\"><a href=\"adminadd\">添加管理员</a></li></ul>");
+        return sb.toString();
+    }%>
 </body>
 </html>

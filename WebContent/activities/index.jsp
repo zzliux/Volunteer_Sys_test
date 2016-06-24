@@ -119,9 +119,9 @@
                 "application/x-www-form-urlencoded");
         xmlHttp.send("act_id="+getId);//这是个测试
         xmlHttp.onreadystatechange = function() {
-            if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+            if (xmlHttp.readyState === 4 && xmlHttp.status === 200) {
                 var text = xmlHttp.responseText;
-                if (text == "error") {
+                if (text === "error") {
                     layer.close(ind2);
                     layer.msg('你还没登录呐！马上给你跳转到登录页面~~');
                     setTimeout(function(){
@@ -131,7 +131,7 @@
                     layer.msg(text);
                 }
             }
-        }
+        };
     }
 </script>
 </body>
